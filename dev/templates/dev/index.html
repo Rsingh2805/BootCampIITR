@@ -1,0 +1,12 @@
+Developer? <br>
+<a href="{% url 'dev:signup' %}">Sign-up</a><br>
+
+<form action="" method="post">
+	{% csrf_token %}
+	Name:<br>
+  	<input type="text" name="dev_name" placeholder="Enter your name"><br>
+  	PassWord:<br>
+  	<input type="password" name="dev_password" placeholder="Enter your password here">
+	
+	
+</form>
