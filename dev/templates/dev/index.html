@@ -1,12 +1,18 @@
-Developer? <br>
-<a href="{% url 'dev:signup' %}">Sign-up</a><br>
+{% if error_message %}
+	{{error_message}}<br><br>   
+{% endif %}
 
-<form action="" method="post">
+
+Developer? <br>
+<a href="{% url 'dev:signup' %}">Sign-up</a><br><br><br><br>
+
+
+Sign-In<br>
+<form action="{% url 'dev:login' %}" method="post">
 	{% csrf_token %}
 	Name:<br>
   	<input type="text" name="dev_name" placeholder="Enter your name"><br>
   	PassWord:<br>
-  	<input type="password" name="dev_password" placeholder="Enter your password here">
-	
-	
+  	<input type="password" name="dev_password" placeholder="Enter your password here"><br>
+  	<input type="submit" name="submit" value="Submit">
 </form>
