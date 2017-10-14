@@ -16,3 +16,16 @@ Sign-In<br>
   	<input type="password" name="dev_password" placeholder="Enter your password here"><br>
   	<input type="submit" name="submit" value="Submit">
 </form>
+
+<br>
+<br><br>
+<hr>
+{% for post in posts %}
+	<ul>
+		<li>{{post.creator.dev_name}}</li>
+		<li>{{post.creator.dev_emailid}}</li>
+		<li>{{post.post_link}}</li>
+		<li>{{post.post_info}}</li>
+	</ul><br><hr>
+	
+{% endfor %}
