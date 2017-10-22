@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <style>
+        *{
+            transition: 0.3s
+        }
+        .navbar-brand{
+            font-family: 'Kaushan Script';
+        }
+        .center-container {
+            min-height: 100%; /* Fallback for browsers do NOT support vh unit */
+            min-height: 100vh; /* These two lines are counted as one :-)       */
+            display: flex;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body style="padding: 10px">
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{% url 'home' %}">BootCamp</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li {% block home %}{% endblock %}><a href="{% url 'home' %}">Home</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            {% if request.user.is_authenticated %}
+                <li {% block add-project %}{% endblock %}><a href="{% url 'add-project' %}"><span class="glyphicon glyphicon-pencil"></span>Add a project</a>
+                <li><a href="{% url 'user-detail' request.user.id %}"><span class="glyphicon glyphicon-user"></span> {{ request.user.username }}</a></li>
+                <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            {% else %}
+                <li {% block signup %}{% endblock %}><a href="{% url 'add-user' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li {% block login %}{% endblock %}><a href="{% url 'login-user' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            {% endif %}
+        </ul>
+
+    </div>
+</nav>
+
+<div class="container" style="margin-top:50px">
+    {% block body %}
+    {% endblock %}
+</div>
+</body>
+</html>

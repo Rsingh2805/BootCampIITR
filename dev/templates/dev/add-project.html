@@ -1,0 +1,25 @@
+{% extends 'dev/base_template.html' %}
+{% block title %}Add a new Project{% endblock %}
+{% block add-project %}class="active"{% endblock %}
+{% block body %}
+    <div class ="center-container">
+    <form action="" method="post" style="margin: auto">
+
+        {% csrf_token %}
+    <ul class = "list-group" style="border-width: 10px">
+
+        {% for field in form %}
+            <div class="form-group">
+            <li class="list-group-item" >
+            <label>{{ field.label_tag }}</label><br>
+            <div style="width: inherit">{{ field }}</div>
+            </li>
+            </div>
+        {% endfor %}
+
+    <li class="list-group-item"><button type="submit" class="btn btn-default form-control">Submit</button></li>
+    </ul>
+    </form>
+    </div>
+{% endblock %}
+

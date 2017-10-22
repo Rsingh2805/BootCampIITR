@@ -1,31 +1,42 @@
-{% if error_message %}
-	{{error_message}}<br><br>   
-{% endif %}
+{% extends 'dev/base_template.html' %}
+{% block title %}Home{% endblock %}
+{% block home %}class="active"{% endblock %}
+{% block body %}
+    {% for project in projects %}
+        <div class="w3-card-4" style="margin: 3%">
+            <header class="w3-container w3-light-grey">
+                <h3>By {{ project.creator.username }}</h3>
+            </header>
+            <div class="w3-container">
+                <h2>{{ project.title }}</h2>
+                <hr>
+                <p>{{ project.description }}</p>
+            </div>
+            <button  class="w3-button w3-block w3-dark-grey" onclick="window.location.href='{{ project.github_link }}'" >Contribute/View Source Code</button>
+        </div>
+    {% endfor %}
+    {% if is_paginated %}
+
+        <ol class="pagination">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+            {% endif %}
+            {% for i in paginator.page_range %}
+                {% if page_obj.number == i %}
+                    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+                {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+        </ol>
+    {% endif %}
+{% endblock %}
 
 
-Developer? <br>
-<a href="{% url 'dev:signup' %}">Sign-up</a><br><br><br><br>
-
-
-Sign-In<br>
-<form action="{% url 'dev:login' %}" method="post">
-	{% csrf_token %}
-	Name:<br>
-  	<input type="text" name="dev_name" placeholder="Enter your name"><br>
-  	PassWord:<br>
-  	<input type="password" name="dev_password" placeholder="Enter your password here"><br>
-  	<input type="submit" name="submit" value="Submit">
-</form>
-
-<br>
-<br><br>
-<hr>
-{% for post in posts %}
-	<ul>
-		<li>{{post.creator.dev_name}}</li>
-		<li>{{post.creator.dev_emailid}}</li>
-		<li>{{post.post_link}}</li>
-		<li>{{post.post_info}}</li>
-	</ul><br><hr>
-	
-{% endfor %}

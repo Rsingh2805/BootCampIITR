@@ -1,0 +1,36 @@
+{% extends 'dev/base_template.html' %}
+{% block title %}Account{% endblock %}
+{% block body %}
+
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h1>{{ user.username }}</h1>
+            <p>Some text that represents "Me"...</p>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-3 text-center">
+        <h3>Contributions</h3><br>
+        {% for project in user.project_set.all %}
+            <div class="w3-card-4" style="margin: 3%">
+                <header class="w3-container w3-light-grey">
+                    <h3>{{ project.title }}{% if request.user == user %}
+                        <form action="{% url 'project-delete' project.id %}" method="post" style="display: inline">
+                            {% csrf_token %}
+                            <input type="hidden" name="album_id" value="{{ project.id }}">
+                            <button type="submit" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-trash"></span> </button>
+                        </form>
+                    {% endif %}</h3>
+                </header>
+                <div class="w3-container">
+                    <p>{{ project.description }}</p>
+                </div>
+                <button  class="w3-button w3-block w3-dark-grey" onclick="window.location.href='{{ project.github_link }}'" >Contribute/View Source Code</button>
+            </div>
+        {% endfor %}
+    </div><br><br>
+
+    <footer class="container-fluid text-center">
+        <p>Contact me at <a href="mailto:{{ user.email }}">{{ user.email }}</a></p>
+    </footer>
+{% endblock %}
