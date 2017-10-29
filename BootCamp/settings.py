@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 """
 Django settings for BootCamp project.
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'v4$=z%q8ve%tjdkwvqpq+7@@k++9(_9z+ta@nm&$e+24#mh+x('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
