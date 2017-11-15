@@ -10,9 +10,9 @@
     </div>
 
     <div class="container-fluid bg-3 text-center">
-        <h3>Contributions</h3><br>
+        <h2>CONTRIBUTIONS</h2><br>
         {% for project in user.project_set.all %}
-            <div class="w3-card-4" style="margin: 3%">
+            <div class="w3-card-4" style="margin: 5%">
                 <header class="w3-container w3-light-grey">
                     <h3>{{ project.title }}{% if request.user == user %}
                         <form action="{% url 'project-delete' project.id %}" method="post" style="display: inline">
